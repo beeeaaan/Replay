@@ -110,18 +110,12 @@ public interface modelMapper {
 	// --- My Page ---
 
 	// 찜 목록
-//	@Select("select poId, poHeart, poTitle, poPrice, poImage01, poState \n"
-//			+ "from deeplearning.post p, deeplearning.wish w, deeplearning.upload up \n"
-//			+ "where w.P_poId = up.P_poId and p.poId = up.P_poId\n"
-//			+ "and w.U_userId = up.U_userId\n"
-//			+ "and w.U_userId = {user} and w.WishDate is not null and up.poDelDate is null;")
-//	List<Join_PostUploadUserWishModel> wishlistSelect(String user);
 	
 	@Select("select poId, poHeart, poTitle, poPrice, poImage01, poState \n"
 			+ "from deeplearning.post p, deeplearning.wish w, deeplearning.upload up \n"
 			+ "where w.P_poId = up.P_poId and p.poId = up.P_poId\n"
 			+ "and w.U_userId = up.U_userId\n"
-			+ "and w.U_userId = 'abc' and w.WishDate is not null and up.poDelDate is not null;")
+			+ "and w.U_userId = #{user} and w.WishDate is not null and up.poDelDate is not null;")
 	List<Join_PostUploadUserWishModel> wishlistSelect(String user);
 
 	// 판매 내역
@@ -129,7 +123,7 @@ public interface modelMapper {
 			+ "from deeplearning.post p, deeplearning.buy b, deeplearning.upload up \n"
 			+ "where b.P_poId = up.P_poId and p.poId = up.P_poId\n"
 			+ "and b.U_userId = up.U_userId\n"
-			+ "and b.U_userId = 'abc' and b.buydate is not null and up.poDelDate is not null;")
+			+ "and b.U_userId = #{user} and b.buydate is not null and up.poDelDate is not null;")
 	List<Join_PostUploadUserWishModel> buylistSelect(String user);
 
 	// 찜 목록 지우기
